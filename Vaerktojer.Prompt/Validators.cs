@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt;
@@ -26,7 +25,10 @@ public static class Validators
         };
     }
 
-    public static Func<object?, ValidationResult?> MinLength(int length, string? errorMessage = default)
+    public static Func<object?, ValidationResult?> MinLength(
+        int length,
+        string? errorMessage = default
+    )
     {
         return input =>
         {
@@ -44,7 +46,10 @@ public static class Validators
         };
     }
 
-    public static Func<object?, ValidationResult?> MaxLength(int length, string? errorMessage = default)
+    public static Func<object?, ValidationResult?> MaxLength(
+        int length,
+        string? errorMessage = default
+    )
     {
         return input =>
         {
@@ -62,7 +67,10 @@ public static class Validators
         };
     }
 
-    public static Func<object?, ValidationResult?> RegularExpression(string pattern, string? errorMessage = default)
+    public static Func<object?, ValidationResult?> RegularExpression(
+        string pattern,
+        string? errorMessage = default
+    )
     {
         return input =>
         {

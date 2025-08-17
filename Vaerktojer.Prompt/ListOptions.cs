@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt;
 
-public class ListOptions<T> where T : notnull
+public class ListOptions<T>
+    where T : notnull
 {
     public string Message { get; set; } = null!;
 
@@ -16,7 +16,8 @@ public class ListOptions<T> where T : notnull
 
     public int Maximum { get; set; } = int.MaxValue;
 
-    public IList<Func<object?, ValidationResult?>> Validators { get; } = new List<Func<object?, ValidationResult?>>();
+    public IList<Func<object?, ValidationResult?>> Validators { get; } =
+        new List<Func<object?, ValidationResult?>>();
 
     internal void EnsureOptions()
     {
@@ -24,12 +25,18 @@ public class ListOptions<T> where T : notnull
 
         if (Minimum < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(Minimum), string.Format(Resource.Validation_Minimum_OutOfRange, Minimum));
+            throw new ArgumentOutOfRangeException(
+                nameof(Minimum),
+                string.Format(Resource.Validation_Minimum_OutOfRange, Minimum)
+            );
         }
 
         if (Maximum < Minimum)
         {
-            throw new ArgumentOutOfRangeException(nameof(Maximum), string.Format(Resource.Validation_Maximum_OutOfRange, Maximum, Minimum));
+            throw new ArgumentOutOfRangeException(
+                nameof(Maximum),
+                string.Format(Resource.Validation_Maximum_OutOfRange, Maximum, Minimum)
+            );
         }
     }
 }

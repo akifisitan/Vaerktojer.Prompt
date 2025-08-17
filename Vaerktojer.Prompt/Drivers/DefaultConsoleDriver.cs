@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
@@ -25,7 +24,10 @@ internal sealed class DefaultConsoleDriver : IConsoleDriver
                 return;
             }
 
-            NativeMethods.SetConsoleMode(hConsole, mode | NativeMethods.ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+            NativeMethods.SetConsoleMode(
+                hConsole,
+                mode | NativeMethods.ENABLE_VIRTUAL_TERMINAL_PROCESSING
+            );
         }
     }
 

@@ -19,14 +19,20 @@ public static class PasswordOptionsExtensions
         return options;
     }
 
-    public static PasswordOptions WithPasswordChar(this PasswordOptions options, string passwordChar)
+    public static PasswordOptions WithPasswordChar(
+        this PasswordOptions options,
+        string passwordChar
+    )
     {
         options.PasswordChar = passwordChar;
 
         return options;
     }
 
-    public static PasswordOptions AddValidators(this PasswordOptions options, params Func<object?, ValidationResult?>[] validators)
+    public static PasswordOptions AddValidators(
+        this PasswordOptions options,
+        params Func<object?, ValidationResult?>[] validators
+    )
     {
         foreach (var validator in validators)
         {

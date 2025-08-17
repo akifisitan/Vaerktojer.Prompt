@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-
 using Vaerktojer.Prompt.Forms;
-
 using AnnotationsDataType = System.ComponentModel.DataAnnotations.DataType;
 
 namespace Vaerktojer.Prompt.Internal;
@@ -18,17 +16,21 @@ internal class PropertyMetadata
 
         PropertyInfo = propertyInfo;
         Type = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
-        ElementType = TypeHelper.IsCollection(propertyInfo.PropertyType) ? propertyInfo.PropertyType.GetGenericArguments()[0] : null;
+        ElementType = TypeHelper.IsCollection(propertyInfo.PropertyType)
+            ? propertyInfo.PropertyType.GetGenericArguments()[0]
+            : null;
         IsNullable = TypeHelper.IsNullable(propertyInfo.PropertyType);
         IsCollection = TypeHelper.IsCollection(propertyInfo.PropertyType);
         DataType = propertyInfo.GetCustomAttribute<DataTypeAttribute>()?.DataType;
-        Message = displayAttribute?.GetName() ?? displayAttribute?.GetDescription() ?? propertyInfo.Name;
+        Message =
+            displayAttribute?.GetName() ?? displayAttribute?.GetDescription() ?? propertyInfo.Name;
         Placeholder = displayAttribute?.GetPrompt();
         Order = displayAttribute?.GetOrder();
         DefaultValue = propertyInfo.GetValue(model);
-        Validators = propertyInfo.GetCustomAttributes<ValidationAttribute>(true)
-                                 .Select(x => new ValidationAttributeAdapter(x).GetValidator(propertyInfo.Name, model))
-                                 .ToArray();
+        Validators = propertyInfo
+            .GetCustomAttributes<ValidationAttribute>(true)
+            .Select(x => new ValidationAttributeAdapter(x).GetValidator(propertyInfo.Name, model))
+            .ToArray();
         ItemsProvider = GetItemsProvider(propertyInfo);
     }
 
@@ -67,8 +69,9 @@ internal class PropertyMetadata
 
     private IItemsProvider GetItemsProvider(PropertyInfo propertyInfo)
     {
-        var itemsProvider = (IItemsProvider?)propertyInfo.GetCustomAttribute<InlineItemsAttribute>(true) ??
-                            propertyInfo.GetCustomAttribute<MemberItemsAttribute>(true);
+        var itemsProvider =
+            (IItemsProvider?)propertyInfo.GetCustomAttribute<InlineItemsAttribute>(true)
+            ?? propertyInfo.GetCustomAttribute<MemberItemsAttribute>(true);
 
         if (itemsProvider is not null)
         {
@@ -97,7 +100,7 @@ internal class PropertyMetadata
             var validationContext = new ValidationContext(model)
             {
                 DisplayName = propertyName,
-                MemberName = propertyName
+                MemberName = propertyName,
             };
 
             return input => _validationAttribute.GetValidationResult(input, validationContext);

@@ -12,7 +12,8 @@ public class InputOptions<T>
 
     public object? DefaultValue { get; set; }
 
-    public IList<Func<object?, ValidationResult?>> Validators { get; } = new List<Func<object?, ValidationResult?>>();
+    public IList<Func<object?, ValidationResult?>> Validators { get; } =
+        new List<Func<object?, ValidationResult?>>();
 
     internal void EnsureOptions()
     {

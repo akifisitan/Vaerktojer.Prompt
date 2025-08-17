@@ -6,7 +6,8 @@ using System.Reflection;
 
 namespace Vaerktojer.Prompt.Internal;
 
-internal static class EnumHelper<TEnum> where TEnum : notnull
+internal static class EnumHelper<TEnum>
+    where TEnum : notnull
 {
     static EnumHelper()
     {
@@ -22,16 +23,18 @@ internal static class EnumHelper<TEnum> where TEnum : notnull
 
     private static EnumMetadata GetEnumMetadata(TEnum value)
     {
-        var displayAttribute = typeof(TEnum).GetField(value.ToString()!)?.GetCustomAttribute<DisplayAttribute>();
+        var displayAttribute = typeof(TEnum)
+            .GetField(value.ToString()!)
+            ?.GetCustomAttribute<DisplayAttribute>();
 
         return new EnumMetadata(displayAttribute?.GetName(), displayAttribute?.GetOrder());
     }
 
-    public static string GetDisplayName(TEnum value) => s_metadataCache[value].DisplayName ?? value.ToString()!;
+    public static string GetDisplayName(TEnum value) =>
+        s_metadataCache[value].DisplayName ?? value.ToString()!;
 
-    public static IEnumerable<TEnum> GetValues() => s_metadataCache.OrderBy(x => x.Value.Order)
-                                                                   .Select(x => x.Key)
-                                                                   .ToArray();
+    public static IEnumerable<TEnum> GetValues() =>
+        s_metadataCache.OrderBy(x => x.Value.Order).Select(x => x.Key).ToArray();
 
     private record EnumMetadata(string? DisplayName, int? Order);
 }

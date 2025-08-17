@@ -1,12 +1,16 @@
 ﻿using System;
-
 using Vaerktojer.Prompt.Drivers;
 
 namespace Vaerktojer.Prompt.Internal;
 
 internal class RenderScope : IDisposable
 {
-    public RenderScope(OffscreenBuffer offscreenBuffer, IConsoleDriver consoleDriver, int cursorBottom, int writtenLineCount)
+    public RenderScope(
+        OffscreenBuffer offscreenBuffer,
+        IConsoleDriver consoleDriver,
+        int cursorBottom,
+        int writtenLineCount
+    )
     {
         _offscreenBuffer = offscreenBuffer;
         _consoleDriver = consoleDriver;

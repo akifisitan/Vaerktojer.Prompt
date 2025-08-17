@@ -14,5 +14,5 @@ public enum MyEnum
     Baz,
 
     [Display(Name = "Test value")]
-    Test
+    Test,
 }

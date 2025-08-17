@@ -13,7 +13,7 @@ internal abstract class TextFormBase<T> : FormBase<T>
             [ConsoleKey.Home] = HandleHome,
             [ConsoleKey.End] = HandleEnd,
             [ConsoleKey.Backspace] = HandleBackspace,
-            [ConsoleKey.Delete] = HandleDelete
+            [ConsoleKey.Delete] = HandleDelete,
         };
     }
 

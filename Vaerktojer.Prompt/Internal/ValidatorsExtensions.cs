@@ -6,7 +6,10 @@ namespace Vaerktojer.Prompt.Internal;
 
 internal static class ValidatorsExtensions
 {
-    public static void Merge(this IList<Func<object?, ValidationResult?>> source, IEnumerable<Func<object?, ValidationResult?>>? validators)
+    public static void Merge(
+        this IList<Func<object?, ValidationResult?>> source,
+        IEnumerable<Func<object?, ValidationResult?>>? validators
+    )
     {
         foreach (var validator in validators ?? [])
         {

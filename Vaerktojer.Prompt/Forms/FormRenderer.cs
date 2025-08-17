@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Vaerktojer.Prompt.Drivers;
 using Vaerktojer.Prompt.Internal;
 

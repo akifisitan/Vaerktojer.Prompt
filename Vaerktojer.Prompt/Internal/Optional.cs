@@ -18,5 +18,6 @@ internal readonly struct Optional<T>
 
     public static Optional<T> Create(T? value) => value is null ? Empty : new Optional<T>(value);
 
-    public static Optional<T> Create(object? value) => value is null ? Empty : new Optional<T>((T)value);
+    public static Optional<T> Create(object? value) =>
+        value is null ? Empty : new Optional<T>((T)value);
 }

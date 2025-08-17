@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Text.Json;
-
 using Vaerktojer.Prompt.Example.Models;
 
 namespace Vaerktojer.Prompt.Example;
@@ -54,7 +53,12 @@ class Program
 
     private static void RunInputSample()
     {
-        var name = Prompt.Input<string>("What's your name?", defaultValue: "John Smith", placeholder: "At least 3 characters", validators: [Validators.Required(), Validators.MinLength(3)]);
+        var name = Prompt.Input<string>(
+            "What's your name?",
+            defaultValue: "John Smith",
+            placeholder: "At least 3 characters",
+            validators: [Validators.Required(), Validators.MinLength(3)]
+        );
         Console.WriteLine($"Hello, {name}!");
     }
 
@@ -66,19 +70,32 @@ class Program
 
     private static void RunPasswordSample()
     {
-        var secret = Prompt.Password("Type new password", placeholder: "At least 8 characters", validators: [Validators.Required(), Validators.MinLength(8)]);
+        var secret = Prompt.Password(
+            "Type new password",
+            placeholder: "At least 8 characters",
+            validators: [Validators.Required(), Validators.MinLength(8)]
+        );
         Console.WriteLine($"Password OK, {secret}");
     }
 
     private static void RunSelectSample()
     {
-        var city = Prompt.Select("Select your city", ["Seattle", "London", "Tokyo", "New York", "Singapore", "Shanghai"], pageSize: 3);
+        var city = Prompt.Select(
+            "Select your city",
+            ["Seattle", "London", "Tokyo", "New York", "Singapore", "Shanghai"],
+            pageSize: 3
+        );
         Console.WriteLine($"Hello, {city}!");
     }
 
     private static void RunMultiSelectSample()
     {
-        var options = Prompt.MultiSelect("Which cities would you like to visit?", ["Seattle", "London", "Tokyo", "New York", "Singapore", "Shanghai"], pageSize: 3, defaultValues: ["Tokyo"]);
+        var options = Prompt.MultiSelect(
+            "Which cities would you like to visit?",
+            ["Seattle", "London", "Tokyo", "New York", "Singapore", "Shanghai"],
+            pageSize: 3,
+            defaultValues: ["Tokyo"]
+        );
         Console.WriteLine($"You picked {string.Join(", ", options)}");
     }
 

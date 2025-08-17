@@ -1,5 +1,4 @@
 ﻿using Vaerktojer.Prompt.Internal;
-
 using Xunit;
 
 namespace Vaerktojer.Prompt.Tests;

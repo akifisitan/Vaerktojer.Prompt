@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-
 using Vaerktojer.Prompt.Internal;
-
 using Xunit;
 
 namespace Vaerktojer.Prompt.Tests;
@@ -11,7 +9,12 @@ public class PaginatorTests
     [Fact]
     public void Basic()
     {
-        var paginator = new Paginator<int>(Enumerable.Range(0, 20), 5, Optional<int>.Empty, x => x.ToString());
+        var paginator = new Paginator<int>(
+            Enumerable.Range(0, 20),
+            5,
+            Optional<int>.Empty,
+            x => x.ToString()
+        );
 
         var currentItems1 = paginator.CurrentItems;
 
@@ -29,7 +32,12 @@ public class PaginatorTests
     [Fact]
     public void Filter_NotEmpty()
     {
-        var paginator = new Paginator<int>(Enumerable.Range(0, 20), 5, Optional<int>.Empty, x => x.ToString());
+        var paginator = new Paginator<int>(
+            Enumerable.Range(0, 20),
+            5,
+            Optional<int>.Empty,
+            x => x.ToString()
+        );
 
         paginator.UpdateFilter("0");
 
@@ -42,7 +50,12 @@ public class PaginatorTests
     [Fact]
     public void Filter_Empty()
     {
-        var paginator = new Paginator<int>(Enumerable.Range(0, 20), 5, Optional<int>.Empty, x => x.ToString());
+        var paginator = new Paginator<int>(
+            Enumerable.Range(0, 20),
+            5,
+            Optional<int>.Empty,
+            x => x.ToString()
+        );
 
         paginator.UpdateFilter("x");
 
@@ -54,7 +67,12 @@ public class PaginatorTests
     [Fact]
     public void SelectedItem()
     {
-        var paginator = new Paginator<int>(Enumerable.Range(0, 20), 5, Optional<int>.Empty, x => x.ToString());
+        var paginator = new Paginator<int>(
+            Enumerable.Range(0, 20),
+            5,
+            Optional<int>.Empty,
+            x => x.ToString()
+        );
 
         paginator.NextPage();
         paginator.NextItem();
@@ -68,7 +86,12 @@ public class PaginatorTests
     [Fact]
     public void SelectedItem_NotSelected()
     {
-        var paginator = new Paginator<int>(Enumerable.Range(0, 20), 5, Optional<int>.Empty, x => x.ToString());
+        var paginator = new Paginator<int>(
+            Enumerable.Range(0, 20),
+            5,
+            Optional<int>.Empty,
+            x => x.ToString()
+        );
 
         var selected = paginator.TryGetSelectedItem(out _);
 
@@ -78,7 +101,12 @@ public class PaginatorTests
     [Fact]
     public void SelectedItem_EmptyList()
     {
-        var paginator = new Paginator<int>(Enumerable.Range(0, 20), 5, Optional<int>.Empty, x => x.ToString());
+        var paginator = new Paginator<int>(
+            Enumerable.Range(0, 20),
+            5,
+            Optional<int>.Empty,
+            x => x.ToString()
+        );
 
         paginator.UpdateFilter("x");
         paginator.NextItem();

@@ -7,5 +7,5 @@ internal enum FormType
     List,
     MultiSelect,
     Password,
-    Select
+    Select,
 }

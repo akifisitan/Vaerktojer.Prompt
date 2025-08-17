@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using Vaerktojer.Prompt.Internal;
 
 namespace Vaerktojer.Prompt;
@@ -19,5 +18,6 @@ public sealed class InlineItemsAttribute : Attribute, IItemsProvider
 
     private readonly object[] _items;
 
-    public IEnumerable<T> GetItems<T>(PropertyInfo targetPropertyInfo) where T : notnull => _items.Cast<T>();
+    public IEnumerable<T> GetItems<T>(PropertyInfo targetPropertyInfo)
+        where T : notnull => _items.Cast<T>();
 }

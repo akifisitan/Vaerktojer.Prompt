@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt.Forms;
 
-internal class ListForm<T> : TextFormBase<IEnumerable<T>> where T : notnull
+internal class ListForm<T> : TextFormBase<IEnumerable<T>>
+    where T : notnull
 {
     public ListForm(ListOptions<T> options)
     {
@@ -57,14 +57,18 @@ internal class ListForm<T> : TextFormBase<IEnumerable<T>> where T : notnull
                     return true;
                 }
 
-                SetError(string.Format(Resource.Validation_Minimum_InputRequired, _options.Minimum));
+                SetError(
+                    string.Format(Resource.Validation_Minimum_InputRequired, _options.Minimum)
+                );
 
                 return false;
             }
 
             if (_inputItems.Count >= _options.Maximum)
             {
-                SetError(string.Format(Resource.Validation_Maximum_InputRequired, _options.Maximum));
+                SetError(
+                    string.Format(Resource.Validation_Maximum_InputRequired, _options.Maximum)
+                );
 
                 return false;
             }
