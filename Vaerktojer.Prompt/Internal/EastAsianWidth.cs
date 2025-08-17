@@ -10,9 +10,14 @@ internal static class EastAsianWidth
         {
             uint codePoint;
 
-            if (char.IsHighSurrogate(value[i]) && (i + 1 < value.Length && char.IsLowSurrogate(value[i + 1])))
+            if (
+                char.IsHighSurrogate(value[i])
+                && (i + 1 < value.Length && char.IsLowSurrogate(value[i + 1]))
+            )
             {
-                codePoint = (uint)(0x10000 + ((value[i] - 0xD800) * 0x0400) + (value[i + 1] - 0xDC00));
+                codePoint = (uint)(
+                    0x10000 + ((value[i] - 0xD800) * 0x0400) + (value[i + 1] - 0xDC00)
+                );
 
                 i++;
             }
@@ -361,7 +366,7 @@ internal static class EastAsianWidth
         new(196608, 65533, false),
         new(917760, 239, true),
         new(983040, 65533, true),
-        new(1048576, 65533, true)
+        new(1048576, 65533, true),
     ];
 
     public readonly record struct EastAsianWidthRange(uint Start, ushort Count, bool Ambiguous);

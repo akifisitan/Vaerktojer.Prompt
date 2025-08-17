@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-
 using Vaerktojer.Prompt.Internal;
 
 namespace Vaerktojer.Prompt.Forms;
@@ -14,10 +13,7 @@ internal class PasswordForm : FormBase<string>
 
         _options = options;
 
-        KeyHandlerMaps = new()
-        {
-            [ConsoleKey.Backspace] = HandleBackspace
-        };
+        KeyHandlerMaps = new() { [ConsoleKey.Backspace] = HandleBackspace };
     }
 
     private readonly PasswordOptions _options;
@@ -34,7 +30,9 @@ internal class PasswordForm : FormBase<string>
 
         if (!string.IsNullOrEmpty(_options.PasswordChar))
         {
-            offscreenBuffer.Write(string.Concat(Enumerable.Repeat(_options.PasswordChar, InputBuffer.Length)));
+            offscreenBuffer.Write(
+                string.Concat(Enumerable.Repeat(_options.PasswordChar, InputBuffer.Length))
+            );
             offscreenBuffer.PushCursor();
         }
     }
@@ -45,7 +43,9 @@ internal class PasswordForm : FormBase<string>
 
         if (!string.IsNullOrEmpty(_options.PasswordChar))
         {
-            offscreenBuffer.WriteAnswer(string.Concat(Enumerable.Repeat(_options.PasswordChar, InputBuffer.Length)));
+            offscreenBuffer.WriteAnswer(
+                string.Concat(Enumerable.Repeat(_options.PasswordChar, InputBuffer.Length))
+            );
         }
     }
 

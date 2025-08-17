@@ -9,5 +9,7 @@ public class Symbol(string value, string fallbackValue)
 
     public static implicit operator string(Symbol symbol) => symbol.ToString();
 
-    private static bool IsUnicodeSupported => !RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || Console.OutputEncoding.CodePage is 1200 or 65001;
+    private static bool IsUnicodeSupported =>
+        !RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+        || Console.OutputEncoding.CodePage is 1200 or 65001;
 }

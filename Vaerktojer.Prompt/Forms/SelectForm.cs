@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt.Forms;
 
-internal class SelectForm<T> : FormBase<T> where T : notnull
+internal class SelectForm<T> : FormBase<T>
+    where T : notnull
 {
     public SelectForm(SelectOptions<T> options)
     {
         options.EnsureOptions();
 
         _options = options;
-        _paginator = new Paginator<T>(options.Items, Math.Min(options.PageSize, Height - 2), Optional<T>.Create(options.DefaultValue), options.TextSelector)
+        _paginator = new Paginator<T>(
+            options.Items,
+            Math.Min(options.PageSize, Height - 2),
+            Optional<T>.Create(options.DefaultValue),
+            options.TextSelector
+        )
         {
-            LoopingSelection = options.LoopingSelection
+            LoopingSelection = options.LoopingSelection,
         };
 
         KeyHandlerMaps = new()
@@ -25,7 +30,7 @@ internal class SelectForm<T> : FormBase<T> where T : notnull
             [ConsoleKey.DownArrow] = HandleDownArrow,
             [ConsoleKey.LeftArrow] = HandleLeftArrow,
             [ConsoleKey.RightArrow] = HandleRightArrow,
-            [ConsoleKey.Backspace] = HandleBackspace
+            [ConsoleKey.Backspace] = HandleBackspace,
         };
     }
 
@@ -47,7 +52,10 @@ internal class SelectForm<T> : FormBase<T> where T : notnull
 
             offscreenBuffer.WriteLine();
 
-            if (_paginator.TryGetSelectedItem(out var selectedItem) && EqualityComparer<T>.Default.Equals(item, selectedItem))
+            if (
+                _paginator.TryGetSelectedItem(out var selectedItem)
+                && EqualityComparer<T>.Default.Equals(item, selectedItem)
+            )
             {
                 offscreenBuffer.WriteSelect($"{Prompt.Symbols.Selector} {value}");
             }
@@ -60,7 +68,13 @@ internal class SelectForm<T> : FormBase<T> where T : notnull
         if (_paginator.PageCount > 1)
         {
             offscreenBuffer.WriteLine();
-            offscreenBuffer.WriteHint(_options.Pagination(_paginator.TotalCount, _paginator.CurrentPage + 1, _paginator.PageCount));
+            offscreenBuffer.WriteHint(
+                _options.Pagination(
+                    _paginator.TotalCount,
+                    _paginator.CurrentPage + 1,
+                    _paginator.PageCount
+                )
+            );
         }
     }
 

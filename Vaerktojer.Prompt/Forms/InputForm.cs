@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 

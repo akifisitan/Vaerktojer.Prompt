@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-
 using Vaerktojer.Prompt.Forms;
 using Vaerktojer.Prompt.Internal;
-
 using Xunit;
 
 namespace Vaerktojer.Prompt.Tests;
@@ -63,7 +61,14 @@ public class PropertyMetadataTests
     [Fact]
     public void Complex_DefaultValue()
     {
-        var metadata = PropertyMetadataFactory.Create(new ComplexModel { Value1 = "sample", Value2 = 42, Value3 = true });
+        var metadata = PropertyMetadataFactory.Create(
+            new ComplexModel
+            {
+                Value1 = "sample",
+                Value2 = 42,
+                Value3 = true,
+            }
+        );
 
         Assert.NotNull(metadata);
         Assert.Equal(3, metadata.Count);
@@ -84,7 +89,14 @@ public class PropertyMetadataTests
     [Fact]
     public void Complex_Order()
     {
-        var metadata = PropertyMetadataFactory.Create(new ComplexWithOrderModel { Value1 = "sample", Value2 = 42, Value3 = true });
+        var metadata = PropertyMetadataFactory.Create(
+            new ComplexWithOrderModel
+            {
+                Value1 = "sample",
+                Value2 = 42,
+                Value3 = true,
+            }
+        );
 
         Assert.NotNull(metadata);
         Assert.Equal(3, metadata.Count);
@@ -170,10 +182,16 @@ public class PropertyMetadataTests
         Assert.Equal(2, metadata.Count);
 
         Assert.Equal(FormType.Select, metadata[0].DetermineFormType());
-        Assert.Equal(Enumerable.Range(1, 5), metadata[0].ItemsProvider.GetItems<int>(metadata[0].PropertyInfo));
+        Assert.Equal(
+            Enumerable.Range(1, 5),
+            metadata[0].ItemsProvider.GetItems<int>(metadata[0].PropertyInfo)
+        );
 
         Assert.Equal(FormType.MultiSelect, metadata[1].DetermineFormType());
-        Assert.Equal(Enumerable.Range(1, 10), metadata[1].ItemsProvider.GetItems<int>(metadata[1].PropertyInfo));
+        Assert.Equal(
+            Enumerable.Range(1, 10),
+            metadata[1].ItemsProvider.GetItems<int>(metadata[1].PropertyInfo)
+        );
     }
 
     [Fact]
@@ -203,10 +221,16 @@ public class PropertyMetadataTests
         Assert.Equal(2, metadata.Count);
 
         Assert.Equal(FormType.Select, metadata[0].DetermineFormType());
-        Assert.Equal(Enumerable.Range(1, 5), metadata[0].ItemsProvider.GetItems<int>(metadata[0].PropertyInfo));
+        Assert.Equal(
+            Enumerable.Range(1, 5),
+            metadata[0].ItemsProvider.GetItems<int>(metadata[0].PropertyInfo)
+        );
 
         Assert.Equal(FormType.Select, metadata[1].DetermineFormType());
-        Assert.Equal(Enumerable.Range(1, 10), metadata[1].ItemsProvider.GetItems<int>(metadata[1].PropertyInfo));
+        Assert.Equal(
+            Enumerable.Range(1, 10),
+            metadata[1].ItemsProvider.GetItems<int>(metadata[1].PropertyInfo)
+        );
     }
 
     public class BasicModel
@@ -260,7 +284,7 @@ public class PropertyMetadataTests
     {
         Value1,
         Value2,
-        Value3
+        Value3,
     }
 
     public class InlineItemsModel

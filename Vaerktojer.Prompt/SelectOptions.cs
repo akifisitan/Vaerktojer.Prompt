@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt;
 
-public class SelectOptions<T> where T : notnull
+public class SelectOptions<T>
+    where T : notnull
 {
     public SelectOptions()
     {
@@ -27,7 +27,9 @@ public class SelectOptions<T> where T : notnull
 
     public Func<T, string> TextSelector { get; set; } = x => x.ToString()!;
 
-    public Func<int, int, int, string> Pagination { get; set; } = (count, current, total) => string.Format(Resource.Message_Pagination, count, current, total);
+    public Func<int, int, int, string> Pagination { get; set; } =
+        (count, current, total) =>
+            string.Format(Resource.Message_Pagination, count, current, total);
 
     public bool LoopingSelection { get; set; } = true;
 

@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt.Forms;
 
-internal class MultiSelectForm<T> : FormBase<IEnumerable<T>> where T : notnull
+internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
+    where T : notnull
 {
     public MultiSelectForm(MultiSelectOptions<T> options)
     {
         options.EnsureOptions();
 
         _options = options;
-        _paginator = new Paginator<T>(options.Items, Math.Min(options.PageSize, Height - 2), Optional<T>.Empty, options.TextSelector)
+        _paginator = new Paginator<T>(
+            options.Items,
+            Math.Min(options.PageSize, Height - 2),
+            Optional<T>.Empty,
+            options.TextSelector
+        )
         {
-            LoopingSelection = options.LoopingSelection
+            LoopingSelection = options.LoopingSelection,
         };
 
         foreach (var defaultValue in options.DefaultValues)
@@ -63,9 +68,14 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>> where T : notnull
 
             offscreenBuffer.WriteLine();
 
-            if (_paginator.TryGetSelectedItem(out var selectedItem) && EqualityComparer<T>.Default.Equals(item, selectedItem))
+            if (
+                _paginator.TryGetSelectedItem(out var selectedItem)
+                && EqualityComparer<T>.Default.Equals(item, selectedItem)
+            )
             {
-                offscreenBuffer.WriteSelect($"{Prompt.Symbols.Selector} {(_selectedItems.Contains(item) ? Prompt.Symbols.Selected : Prompt.Symbols.NotSelect)} {value}");
+                offscreenBuffer.WriteSelect(
+                    $"{Prompt.Symbols.Selector} {(_selectedItems.Contains(item) ? Prompt.Symbols.Selected : Prompt.Symbols.NotSelect)} {value}"
+                );
             }
             else
             {
@@ -83,7 +93,13 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>> where T : notnull
         if (_paginator.PageCount > 1)
         {
             offscreenBuffer.WriteLine();
-            offscreenBuffer.WriteHint(_options.Pagination(_paginator.TotalCount, _paginator.CurrentPage + 1, _paginator.PageCount));
+            offscreenBuffer.WriteHint(
+                _options.Pagination(
+                    _paginator.TotalCount,
+                    _paginator.CurrentPage + 1,
+                    _paginator.PageCount
+                )
+            );
         }
     }
 
@@ -97,9 +113,7 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>> where T : notnull
     {
         if (_selectedItems.Count >= _options.Minimum)
         {
-            result = _options.Items
-                             .Where(x => _selectedItems.Contains(x))
-                             .ToArray();
+            result = _options.Items.Where(x => _selectedItems.Contains(x)).ToArray();
 
             return true;
         }
@@ -135,7 +149,9 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>> where T : notnull
         {
             if (_selectedItems.Count >= _options.Maximum)
             {
-                SetError(string.Format(Resource.Validation_Maximum_SelectionRequired, _options.Maximum));
+                SetError(
+                    string.Format(Resource.Validation_Maximum_SelectionRequired, _options.Maximum)
+                );
             }
             else
             {

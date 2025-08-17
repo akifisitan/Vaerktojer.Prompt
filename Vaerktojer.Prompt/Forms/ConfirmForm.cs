@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
@@ -42,7 +41,9 @@ internal class ConfirmForm : TextFormBase<bool>
     protected override void FinishTemplate(OffscreenBuffer offscreenBuffer, bool result)
     {
         offscreenBuffer.WriteDone(_options.Message);
-        offscreenBuffer.WriteAnswer(result ? Resource.ConfirmForm_Answer_Yes : Resource.ConfirmForm_Answer_No);
+        offscreenBuffer.WriteAnswer(
+            result ? Resource.ConfirmForm_Answer_Yes : Resource.ConfirmForm_Answer_No
+        );
     }
 
     protected override bool HandleEnter(out bool result)
@@ -62,16 +63,26 @@ internal class ConfirmForm : TextFormBase<bool>
         }
         else
         {
-            if (input.Equals(Resource.ConfirmForm_Answer_Yes, StringComparison.OrdinalIgnoreCase) ||
-                input.Equals(Resource.ConfirmForm_Answer_Yes[..1], StringComparison.OrdinalIgnoreCase))
+            if (
+                input.Equals(Resource.ConfirmForm_Answer_Yes, StringComparison.OrdinalIgnoreCase)
+                || input.Equals(
+                    Resource.ConfirmForm_Answer_Yes[..1],
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 result = true;
 
                 return true;
             }
 
-            if (input.Equals(Resource.ConfirmForm_Answer_No, StringComparison.OrdinalIgnoreCase) ||
-                input.Equals(Resource.ConfirmForm_Answer_No[..1], StringComparison.OrdinalIgnoreCase))
+            if (
+                input.Equals(Resource.ConfirmForm_Answer_No, StringComparison.OrdinalIgnoreCase)
+                || input.Equals(
+                    Resource.ConfirmForm_Answer_No[..1],
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 result = false;
 

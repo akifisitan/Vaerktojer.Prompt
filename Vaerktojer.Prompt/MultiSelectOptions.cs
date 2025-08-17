@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Vaerktojer.Prompt.Internal;
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt;
 
-public class MultiSelectOptions<T> where T : notnull
+public class MultiSelectOptions<T>
+    where T : notnull
 {
     public MultiSelectOptions()
     {
@@ -31,7 +31,9 @@ public class MultiSelectOptions<T> where T : notnull
 
     public Func<T, string> TextSelector { get; set; } = x => x.ToString()!;
 
-    public Func<int, int, int, string> Pagination { get; set; } = (count, current, total) => string.Format(Resource.Message_Pagination, count, current, total);
+    public Func<int, int, int, string> Pagination { get; set; } =
+        (count, current, total) =>
+            string.Format(Resource.Message_Pagination, count, current, total);
 
     public bool LoopingSelection { get; set; } = true;
 
@@ -45,12 +47,18 @@ public class MultiSelectOptions<T> where T : notnull
 
         if (Minimum < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(Minimum), string.Format(Resource.Validation_Minimum_OutOfRange, Minimum));
+            throw new ArgumentOutOfRangeException(
+                nameof(Minimum),
+                string.Format(Resource.Validation_Minimum_OutOfRange, Minimum)
+            );
         }
 
         if (Maximum < Minimum)
         {
-            throw new ArgumentOutOfRangeException(nameof(Maximum), string.Format(Resource.Validation_Maximum_OutOfRange, Maximum, Minimum));
+            throw new ArgumentOutOfRangeException(
+                nameof(Maximum),
+                string.Format(Resource.Validation_Maximum_OutOfRange, Maximum, Minimum)
+            );
         }
     }
 }

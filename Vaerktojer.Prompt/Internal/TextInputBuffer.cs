@@ -64,12 +64,18 @@ internal class TextInputBuffer
     {
         var count = 0;
 
-        while (_position + count < _inputBuffer.Length && !char.IsWhiteSpace(_inputBuffer[_position + count]))
+        while (
+            _position + count < _inputBuffer.Length
+            && !char.IsWhiteSpace(_inputBuffer[_position + count])
+        )
         {
             count++;
         }
 
-        while (_position + count < _inputBuffer.Length && char.IsWhiteSpace(_inputBuffer[_position + count]))
+        while (
+            _position + count < _inputBuffer.Length
+            && char.IsWhiteSpace(_inputBuffer[_position + count])
+        )
         {
             count++;
         }
@@ -131,7 +137,8 @@ internal class TextInputBuffer
 
     public string ToBackwardString() => _inputBuffer.ToString(0, _position);
 
-    public string ToForwardString() => _inputBuffer.ToString(_position, _inputBuffer.Length - _position);
+    public string ToForwardString() =>
+        _inputBuffer.ToString(_position, _inputBuffer.Length - _position);
 
     public override string ToString() => _inputBuffer.ToString();
 }

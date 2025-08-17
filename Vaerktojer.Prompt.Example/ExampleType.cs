@@ -10,5 +10,5 @@ public enum ExampleType
     SelectWithEnum,
     MultiSelectWithEnum,
     List,
-    Bind
+    Bind,
 }

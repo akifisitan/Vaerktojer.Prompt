@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Vaerktojer.Prompt.Drivers;
 
 namespace Vaerktojer.Prompt.Internal;
@@ -21,7 +20,8 @@ internal class OffscreenBuffer : IDisposable
     private int _cursorBottom;
     private Cursor? _pushedCursor;
 
-    private int WrittenLineCount => _outputBuffer.Sum(x => (x.Sum(xs => xs.Width) - 1) / _consoleDriver.BufferWidth + 1) - 1;
+    private int WrittenLineCount =>
+        _outputBuffer.Sum(x => (x.Sum(xs => xs.Width) - 1) / _consoleDriver.BufferWidth + 1) - 1;
 
     public void Dispose() => _consoleDriver.Dispose();
 
@@ -49,7 +49,8 @@ internal class OffscreenBuffer : IDisposable
         _pushedCursor = new Cursor(_outputBuffer.Last().Sum(x => x.Width), _outputBuffer.Count - 1);
     }
 
-    public IDisposable BeginRender() => new RenderScope(this, _consoleDriver, _cursorBottom, WrittenLineCount);
+    public IDisposable BeginRender() =>
+        new RenderScope(this, _consoleDriver, _cursorBottom, WrittenLineCount);
 
     public void RenderToConsole()
     {

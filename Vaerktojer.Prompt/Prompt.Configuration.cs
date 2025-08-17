@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-
 using Vaerktojer.Prompt.Strings;
 
 namespace Vaerktojer.Prompt;
