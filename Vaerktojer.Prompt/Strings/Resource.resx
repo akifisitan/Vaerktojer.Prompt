@@ -130,10 +130,10 @@
     <value>{0} type does not have a {1} member</value>
   </data>
   <data name="MultiSelectForm_Message_Hint" xml:space="preserve">
-    <value>Hit &lt;space&gt; to select, &lt;ctrl+a&gt; to toggle all, &lt;ctrl+i&gt; to invert selection</value>
+    <value>Use &lt;up&gt; and &lt;down&gt; to move, &lt;space&gt; to select, &lt;enter&gt; to confirm, &lt;ctrl+a&gt; to toggle all, &lt;ctrl+i&gt; to invert selection</value>
   </data>
   <data name="Message_Pagination" xml:space="preserve">
-    <value>({0} items, {1}/{2} pages)</value>
+    <value>[{0} items | Page {1} / {2}] Use &lt;left&gt; and &lt;right&gt; to move between pages</value>
   </data>
   <data name="Validation_Invalid" xml:space="preserve">
     <value>Value is invalid</value>
@@ -176,5 +176,8 @@
   </data>
   <data name="ConfirmForm_Answer_No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="SelectForm_Message_Hint" xml:space="preserve">
+    <value>Use &lt;up&gt; and &lt;down&gt; to move, &lt;enter&gt; to confirm</value>
   </data>
 </root>

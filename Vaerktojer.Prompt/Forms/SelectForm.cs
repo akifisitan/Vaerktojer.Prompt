@@ -18,7 +18,7 @@ internal class SelectForm<T> : FormBase<T>
             options.Items,
             Math.Min(options.PageSize, Height - 2),
             Optional<T>.Create(options.DefaultValue),
-            options.TextSelector
+            options.TextInputFilter
         )
         {
             LoopingSelection = options.LoopingSelection,
@@ -76,6 +76,17 @@ internal class SelectForm<T> : FormBase<T>
                 )
             );
         }
+
+        if (_paginator.TotalCount == 0)
+        {
+            offscreenBuffer.WriteLine();
+            offscreenBuffer.WriteError("No matches found");
+        }
+        else
+        {
+            offscreenBuffer.WriteLine();
+            offscreenBuffer.WriteHint(Resource.SelectForm_Message_Hint);
+        }
     }
 
     protected override void FinishTemplate(OffscreenBuffer offscreenBuffer, T result)
@@ -98,6 +109,11 @@ internal class SelectForm<T> : FormBase<T>
 
     protected override bool HandleTextInput(ConsoleKeyInfo keyInfo)
     {
+        if (!_options.SearchIsEnabled)
+        {
+            return false;
+        }
+
         base.HandleTextInput(keyInfo);
 
         _paginator.UpdateFilter(InputBuffer.ToString());
@@ -140,7 +156,15 @@ internal class SelectForm<T> : FormBase<T>
             return false;
         }
 
-        InputBuffer.Backspace();
+        if (keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control))
+        {
+            InputBuffer.BackspaceWord();
+        }
+        else
+        {
+            InputBuffer.Backspace();
+        }
+
         _paginator.UpdateFilter(InputBuffer.ToString());
 
         return true;

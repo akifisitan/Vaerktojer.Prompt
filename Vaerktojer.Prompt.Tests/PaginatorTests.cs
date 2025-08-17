@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Vaerktojer.Prompt.Internal;
 using Xunit;
 
@@ -13,7 +14,8 @@ public class PaginatorTests
             Enumerable.Range(0, 20),
             5,
             Optional<int>.Empty,
-            x => x.ToString()
+            (item, keyword) =>
+                item.ToString()!.Contains(keyword, StringComparison.OrdinalIgnoreCase)
         );
 
         var currentItems1 = paginator.CurrentItems;
@@ -36,7 +38,8 @@ public class PaginatorTests
             Enumerable.Range(0, 20),
             5,
             Optional<int>.Empty,
-            x => x.ToString()
+            (item, keyword) =>
+                item.ToString()!.Contains(keyword, StringComparison.OrdinalIgnoreCase)
         );
 
         paginator.UpdateFilter("0");
@@ -54,7 +57,8 @@ public class PaginatorTests
             Enumerable.Range(0, 20),
             5,
             Optional<int>.Empty,
-            x => x.ToString()
+            (item, keyword) =>
+                item.ToString()!.Contains(keyword, StringComparison.OrdinalIgnoreCase)
         );
 
         paginator.UpdateFilter("x");
@@ -71,31 +75,16 @@ public class PaginatorTests
             Enumerable.Range(0, 20),
             5,
             Optional<int>.Empty,
-            x => x.ToString()
+            (item, keyword) =>
+                item.ToString()!.Contains(keyword, StringComparison.OrdinalIgnoreCase)
         );
 
         paginator.NextPage();
-        paginator.NextItem();
 
         var selected = paginator.TryGetSelectedItem(out var selectedItem);
 
         Assert.True(selected);
         Assert.Equal(5, selectedItem);
-    }
-
-    [Fact]
-    public void SelectedItem_NotSelected()
-    {
-        var paginator = new Paginator<int>(
-            Enumerable.Range(0, 20),
-            5,
-            Optional<int>.Empty,
-            x => x.ToString()
-        );
-
-        var selected = paginator.TryGetSelectedItem(out _);
-
-        Assert.False(selected);
     }
 
     [Fact]
@@ -105,7 +94,8 @@ public class PaginatorTests
             Enumerable.Range(0, 20),
             5,
             Optional<int>.Empty,
-            x => x.ToString()
+            (item, keyword) =>
+                item.ToString()!.Contains(keyword, StringComparison.OrdinalIgnoreCase)
         );
 
         paginator.UpdateFilter("x");

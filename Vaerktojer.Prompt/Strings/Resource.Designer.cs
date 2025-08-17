@@ -88,7 +88,7 @@ namespace Vaerktojer.Prompt.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ({0} items, {1}/{2} pages).
+        ///   Looks up a localized string similar to [{0} items | Page {1} / {2}] Use &lt;left&gt; and &lt;right&gt; to move between pages.
         /// </summary>
         internal static string Message_Pagination {
             get {
@@ -106,11 +106,20 @@ namespace Vaerktojer.Prompt.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hit &lt;space&gt; to select, &lt;ctrl+a&gt; to toggle all, &lt;ctrl+i&gt; to invert selection.
+        ///   Looks up a localized string similar to Use &lt;up&gt; and &lt;down&gt; to move, &lt;space&gt; to select, &lt;enter&gt; to confirm, &lt;ctrl+a&gt; to toggle all, &lt;ctrl+i&gt; to invert selection.
         /// </summary>
         internal static string MultiSelectForm_Message_Hint {
             get {
                 return ResourceManager.GetString("MultiSelectForm_Message_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use &lt;up&gt; and &lt;down&gt; to move, &lt;enter&gt; to confirm.
+        /// </summary>
+        internal static string SelectForm_Message_Hint {
+            get {
+                return ResourceManager.GetString("SelectForm_Message_Hint", resourceCulture);
             }
         }
         

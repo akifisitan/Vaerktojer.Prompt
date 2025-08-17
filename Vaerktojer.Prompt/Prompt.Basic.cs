@@ -122,7 +122,9 @@ public static partial class Prompt
         IEnumerable<T>? items = default,
         int pageSize = int.MaxValue,
         object? defaultValue = default,
-        Func<T, string>? textSelector = default
+        Func<T, string>? textSelector = default,
+        bool searchIsEnabled = true,
+        Func<T, string, bool>? textInputFilter = default
     )
         where T : notnull
     {
@@ -141,6 +143,13 @@ public static partial class Prompt
             if (textSelector is not null)
             {
                 options.TextSelector = textSelector;
+            }
+
+            options.SearchIsEnabled = searchIsEnabled;
+
+            if (textInputFilter is not null)
+            {
+                options.TextInputFilter = textInputFilter;
             }
         });
     }
@@ -170,7 +179,9 @@ public static partial class Prompt
         int minimum = 1,
         int maximum = int.MaxValue,
         IEnumerable<T>? defaultValues = default,
-        Func<T, string>? textSelector = default
+        Func<T, string>? textSelector = default,
+        bool searchIsEnabled = true,
+        Func<T, string, bool>? textInputFilter = default
     )
         where T : notnull
     {
@@ -195,6 +206,13 @@ public static partial class Prompt
             if (textSelector is not null)
             {
                 options.TextSelector = textSelector;
+            }
+
+            options.SearchIsEnabled = searchIsEnabled;
+
+            if (textInputFilter is not null)
+            {
+                options.TextInputFilter = textInputFilter;
             }
         });
     }

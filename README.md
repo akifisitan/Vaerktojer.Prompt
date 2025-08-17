@@ -5,7 +5,7 @@
 [![NuGet](https://badgen.net/nuget/v/Vaerktojer.Prompt)](https://www.nuget.org/packages/Vaerktojer.Prompt/)
 [![License](https://badgen.net/github/license/akifisitan/Vaerktojer.Prompt)](https://github.com/akifisitan/Vaerktojer.Prompt/blob/master/LICENSE)
 
-Interactive command-line based application framework for C#
+Interactive command-line based application framework for C#. Forked from [Sharprompt](https://github.com/shibayan/Sharprompt).
 
 ![Vaerktojer.Prompt](https://user-images.githubusercontent.com/1356444/62227794-87506e00-b3f7-11e9-84ae-06c9a900448b.gif)
 
