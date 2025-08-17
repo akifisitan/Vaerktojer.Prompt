@@ -70,7 +70,14 @@ internal class PasswordForm : FormBase<string>
             return false;
         }
 
-        InputBuffer.Backspace();
+        if (keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control))
+        {
+            InputBuffer.BackspaceWord();
+        }
+        else
+        {
+            InputBuffer.Backspace();
+        }
 
         return true;
     }

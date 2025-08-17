@@ -19,7 +19,7 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
             options.Items,
             Math.Min(options.PageSize, Height - 2),
             Optional<T>.Empty,
-            options.TextSelector
+            options.TextInputFilter
         )
         {
             LoopingSelection = options.LoopingSelection,
@@ -56,11 +56,6 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
         offscreenBuffer.Write(_paginator.FilterKeyword);
 
         offscreenBuffer.PushCursor();
-
-        if (string.IsNullOrEmpty(_paginator.FilterKeyword))
-        {
-            offscreenBuffer.WriteHint(Resource.MultiSelectForm_Message_Hint);
-        }
 
         foreach (var item in _paginator.CurrentItems)
         {
@@ -101,6 +96,17 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
                 )
             );
         }
+
+        if (_paginator.TotalCount == 0)
+        {
+            offscreenBuffer.WriteLine();
+            offscreenBuffer.WriteError("No matches found");
+        }
+        else
+        {
+            offscreenBuffer.WriteLine();
+            offscreenBuffer.WriteHint(Resource.MultiSelectForm_Message_Hint);
+        }
     }
 
     protected override void FinishTemplate(OffscreenBuffer offscreenBuffer, IEnumerable<T> result)
@@ -127,6 +133,18 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
 
     protected override bool HandleTextInput(ConsoleKeyInfo keyInfo)
     {
+        if (!_options.SearchIsEnabled)
+        {
+            return false;
+        }
+
+        // TODO: store last input, if arrows use spacebar for selecting,
+        // otherwise for querying
+        if (keyInfo.Key == ConsoleKey.Spacebar)
+        {
+            return false;
+        }
+
         base.HandleTextInput(keyInfo);
 
         _paginator.UpdateFilter(InputBuffer.ToString());
@@ -141,11 +159,7 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
             return false;
         }
 
-        if (_selectedItems.Contains(currentItem))
-        {
-            _selectedItems.Remove(currentItem);
-        }
-        else
+        if (!_selectedItems.Remove(currentItem))
         {
             if (_selectedItems.Count >= _options.Maximum)
             {
@@ -197,7 +211,15 @@ internal class MultiSelectForm<T> : FormBase<IEnumerable<T>>
             return false;
         }
 
-        InputBuffer.Backspace();
+        if (keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control))
+        {
+            InputBuffer.BackspaceWord();
+        }
+        else
+        {
+            InputBuffer.Backspace();
+        }
+
         _paginator.UpdateFilter(InputBuffer.ToString());
 
         return true;

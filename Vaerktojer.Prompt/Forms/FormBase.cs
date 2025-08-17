@@ -23,8 +23,7 @@ internal abstract class FormBase<T> : IDisposable
 
     protected TextInputBuffer InputBuffer { get; } = new();
 
-    protected Dictionary<ConsoleKey, Func<ConsoleKeyInfo, bool>> KeyHandlerMaps { get; set; } =
-        new();
+    protected Dictionary<ConsoleKey, Func<ConsoleKeyInfo, bool>> KeyHandlerMaps { get; set; } = [];
 
     protected int Width => _consoleDriver.WindowWidth;
 
