@@ -1,32 +1,32 @@
-# Sharprompt
+# Vaerktojer.Prompt
 
-[![Build](https://github.com/shibayan/Sharprompt/workflows/Build/badge.svg)](https://github.com/shibayan/Sharprompt/actions/workflows/build.yml)
-[![Downloads](https://badgen.net/nuget/dt/Sharprompt)](https://www.nuget.org/packages/Sharprompt/)
-[![NuGet](https://badgen.net/nuget/v/Sharprompt)](https://www.nuget.org/packages/Sharprompt/)
-[![License](https://badgen.net/github/license/shibayan/Sharprompt)](https://github.com/shibayan/Sharprompt/blob/master/LICENSE)
+[![Build](https://github.com/akifisitan/Vaerktojer.Prompt/workflows/Build/badge.svg)](https://github.com/akifisitan/Vaerktojer.Prompt/actions/workflows/build.yml)
+[![Downloads](https://badgen.net/nuget/dt/Vaerktojer.Prompt)](https://www.nuget.org/packages/Vaerktojer.Prompt/)
+[![NuGet](https://badgen.net/nuget/v/Vaerktojer.Prompt)](https://www.nuget.org/packages/Vaerktojer.Prompt/)
+[![License](https://badgen.net/github/license/akifisitan/Vaerktojer.Prompt)](https://github.com/akifisitan/Vaerktojer.Prompt/blob/master/LICENSE)
 
 Interactive command-line based application framework for C#
 
-![sharprompt](https://user-images.githubusercontent.com/1356444/62227794-87506e00-b3f7-11e9-84ae-06c9a900448b.gif)
+![Vaerktojer.Prompt](https://user-images.githubusercontent.com/1356444/62227794-87506e00-b3f7-11e9-84ae-06c9a900448b.gif)
 
 ## Features
 
-- Multi-platform support
-- Supports the popular prompts (`Input` / `Password` / `Select` / etc)
-- Supports model-based prompts
-- Validation of input value
-- Automatic generation of data source using Enum type
-- Customizable symbols and color schema
-- Unicode support (Multi-byte characters and Emoji😀🎉)
+-   Multi-platform support
+-   Supports the popular prompts (`Input` / `Password` / `Select` / etc)
+-   Supports model-based prompts
+-   Validation of input value
+-   Automatic generation of data source using Enum type
+-   Customizable symbols and color schema
+-   Unicode support (Multi-byte characters and Emoji😀🎉)
 
 ## Installation
 
 ```
-Install-Package Sharprompt
+Install-Package Vaerktojer.Prompt
 ```
 
 ```
-dotnet add package Sharprompt
+dotnet add package Vaerktojer.Prompt
 ```
 
 ```csharp
@@ -45,10 +45,10 @@ Console.WriteLine($"Your answer is {answer}");
 
 ## Examples
 
-The project in the folder `Sharprompt.Example` contains all the samples. Please check it.
+The project in the folder `Vaerktojer.Prompt.Example` contains all the samples. Please check it.
 
 ```
-dotnet run --project Sharprompt.Example
+dotnet run --project Vaerktojer.Prompt.Example
 ```
 
 ## Prompt types
@@ -214,7 +214,7 @@ Console.WriteLine($"Hello, {name}!");
 ### Fluent interface support
 
 ```csharp
-using Sharprompt.Fluent;
+using Vaerktojer.Prompt.Fluent;
 
 // Use fluent interface
 var city = Prompt.Select<string>(o => o.WithMessage("Select your city")
@@ -224,15 +224,15 @@ var city = Prompt.Select<string>(o => o.WithMessage("Select your city")
 
 ## Supported platforms
 
-- Windows
-  - Command Prompt
-  - PowerShell
-  - Windows Terminal
-- Linux (Ubuntu, etc)
-  - Windows Terminal (WSL 2)
-- macOS
-  - Terminal.app
+-   Windows
+    -   Command Prompt
+    -   PowerShell
+    -   Windows Terminal
+-   Linux (Ubuntu, etc)
+    -   Windows Terminal (WSL 2)
+-   macOS
+    -   Terminal.app
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/shibayan/Sharprompt/blob/master/LICENSE)
+This project is licensed under the [MIT License](https://github.com/akifisitan/Vaerktojer.Prompt/blob/master/LICENSE)
