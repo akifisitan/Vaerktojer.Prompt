@@ -3,7 +3,7 @@
 [![Build](https://github.com/akifisitan/Vaerktojer.Prompt/workflows/Build/badge.svg)](https://github.com/akifisitan/Vaerktojer.Prompt/actions/workflows/build.yml)
 [![Downloads](https://badgen.net/nuget/dt/Vaerktojer.Prompt)](https://www.nuget.org/packages/Vaerktojer.Prompt/)
 [![NuGet](https://badgen.net/nuget/v/Vaerktojer.Prompt)](https://www.nuget.org/packages/Vaerktojer.Prompt/)
-[![License](https://badgen.net/github/license/akifisitan/Vaerktojer.Prompt)](https://github.com/akifisitan/Vaerktojer.Prompt/blob/master/LICENSE)
+[![License](https://badgen.net/github/license/akifisitan/Vaerktojer.Prompt)](https://github.com/akifisitan/Vaerktojer.Prompt/blob/main/LICENSE)
 
 Interactive command-line based application framework for C#. Forked from [Sharprompt](https://github.com/shibayan/Sharprompt).
 
@@ -235,4 +235,4 @@ var city = Prompt.Select<string>(o => o.WithMessage("Select your city")
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/akifisitan/Vaerktojer.Prompt/blob/master/LICENSE)
+This project is licensed under the [MIT License](https://github.com/akifisitan/Vaerktojer.Prompt/blob/main/LICENSE)
